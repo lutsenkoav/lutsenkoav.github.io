@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Алексей Луценко — QA Manual Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ----- RESET & BASE ----- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f2f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        /* ----- КОНТЕЙНЕР РЕЗЮМЕ (имитация страницы А4) ----- */
+        .resume {
+            max-width: 1100px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 48px 56px;
+            transition: all 0.2s;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 16px 10px;
+            }
+            .resume {
+                padding: 24px 18px;
+                border-radius: 12px;
+            }
+        }
+
+        /* ----- ШАПКА ----- */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 28px;
+            border-bottom: 3px solid #1a3a5c;
+            padding-bottom: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .header-left h1 {
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #1a3a5c;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .header-left .title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #334155;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 15px;
+            color: #1e293b;
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+
+        .header-right .contact-item {
+            display: inline-block;
+            margin-left: 18px;
+            white-space: nowrap;
+        }
+
+        .header-right .contact-item:first-child {
+            margin-left: 0;
+        }
+
+        .header-right a {
+            color: #1a3a5c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.2s;
+        }
+
+        .header-right a:hover {
+            border-bottom-color: #1a3a5c;
+        }
+
+        .header-right .location {
+            font-weight: 400;
+            color: #475569;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .header-right {
+                text-align: left;
+                width: 100%;
+            }
+            .header-right .contact-item {
+                margin-left: 0;
+                margin-right: 18px;
+                white-space: normal;
+            }
+            .header-left h1 {
+                font-size: 28px;
+            }
+            .header-left .title {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-right .contact-item {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 2px;
+            }
+        }
+
+        /* ----- ОБЩИЕ СТИЛИ ДЛЯ СЕКЦИЙ ----- */
+        .section {
+            margin-top: 28px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a3a5c;
+            border-bottom: 2px solid #e9edf4;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+
+        /* ----- О СЕБЕ (SUMMARY) ----- */
+        .summary-text {
+            font-size: 15px;
+            color: #1e293b;
+            line-height: 1.6;
+            max-width: 95%;
+        }
+
+        /* ----- НАВЫКИ (сетка) ----- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 32px;
+            font-size: 14.5px;
+        }
+
+        .skills-grid .skill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 6px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .skills-grid .skill-group:last-child {
+            border-bottom: none;
+        }
+
+        .skill-label {
+            font-weight: 600;
+            color: #1a3a5c;
+            min-width: 135px;
+            flex-shrink: 0;
+        }
+
+        .skill-value {
+            color: #1e293b;
+            flex: 1;
+        }
+
+        .skill-value .badge {
+            display: inline-block;
+            background: #eef2f6;
+            padding: 0 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin: 2px 3px 2px 0;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+            .skill-label {
+                min-width: 100px;
+            }
+        }
+
+        /* ----- ОПЫТ РАБОТЫ ----- */
+        .experience-item {
+            margin-bottom: 24px;
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .exp-company {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .exp-company .exp-role {
+            font-weight: 500;
+            color: #334155;
+            font-size: 15px;
+            margin-left: 6px;
+        }
+
+        .exp-period {
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .exp-description {
+            margin-top: 6px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .exp-description li {
+            font-size: 14.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            margin-bottom: 4px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .exp-description li::before {
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: #1a3a5c;
+            font-weight: 700;
+        }
+
+        .exp-description li strong {
+            color: #0f172a;
+        }
+
+        .exp-short {
+            font-size: 14.5px;
+            color: #1e293b;
+            line-height: 1.6;
+            margin-top: 4px;
+            padding-left: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .exp-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+            .exp-period {
+                white-space: normal;
+            }
+            .exp-company .exp-role {
+                display: block;
+                margin-left: 0;
+            }
+        }
+
+        /* ----- ОБРАЗОВАНИЕ ----- */
+        .edu-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 15px;
+            padding: 4px 0;
+        }
+
+        .edu-item .edu-year {
+            font-weight: 600;
+            color: #1a3a5c;
+            min-width: 60px;
+        }
+
+        .edu-item .edu-desc {
+            flex: 1;
+            margin-left: 16px;
+        }
+
+        .edu-item .edu-desc .edu-major {
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        @media (max-width: 480px) {
+            .edu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+            .edu-item .edu-desc {
+                margin-left: 0;
+            }
+        }
+
+        /* ----- ЯЗЫКИ + ДОПОЛНИТЕЛЬНО (две колонки) ----- */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .two-col .col {
+            font-size: 14.5px;
+            line-height: 1.7;
+        }
+
+        .two-col .col strong {
+            color: #1a3a5c;
+        }
+
+        .two-col .col ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 2px;
+        }
+
+        .two-col .col ul li {
+            padding-left: 18px;
+            position: relative;
+            margin-bottom: 2px;
+        }
+
+        .two-col .col ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1a3a5c;
+            font-weight: 700;
+        }
+
+        .two-col .col a {
+            color: #1a3a5c;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.2s;
+        }
+
+        .two-col .col a:hover {
+            border-bottom-color: #1a3a5c;
+        }
+
+        @media (max-width: 640px) {
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        /* ----- PRINT (для сохранения в PDF) ----- */
+        @media print {
+            body {
+                background: #ffffff;
+                padding: 0;
+                margin: 0;
+                display: block;
+            }
+            .resume {
+                max-width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 36px 44px;
+            }
+            .header-right a {
+                border-bottom: none;
+            }
+            .skill-value .badge {
+                background: #eef2f6;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .exp-description li::before {
+                color: #1a3a5c;
+            }
+            .two-col .col ul li::before {
+                color: #1a3a5c;
+            }
+        }
+
+        /* маленький хелпер */
+        .mt-1 {
+            margin-top: 4px;
+        }
+        .mb-0 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume">
+
+        <!-- ============================= -->
+        <!--  ШАПКА                        -->
+        <!-- ============================= -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Алексей Луценко</h1>
+                <div class="title">QA Manual Engineer</div>
+            </div>
+            <div class="header-right">
+                <div><span class="location">📍 Йошкар-Ола, Россия</span></div>
+                <div style="margin-top:2px;">
+                    <span class="contact-item">📞 +7 (964) 861-59-85</span>
+                    <span class="contact-item">✉️ <a href="mailto:email@mail.com">aleksey-lutsenko@ya.ru</a></span>
+                </div>
+                <div style="margin-top:2px;">
+                    <span class="contact-item">💬 <a href="https://t.me/lutsenkoav">@lutsenkoav</a></span>
+                    <span class="contact-item">🐙 <a href="#">https://lutsenkoav.github.io</a></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ============================= -->
+        <!--  О СЕБЕ                       -->
+        <!-- ============================= -->
+        <section class="section">
+            <div class="summary-text">
+                QA Manual Engineer с 15-летним стажем.
+                Специализируюсь на функциональном и регрессионном тестировании
+                Web и мобильных приложений (Android/iOS/Cordova).
+                Проектирую тестовые сценарии, выстраиваю QA-процессы с нуля,
+                собираю приложения из исходного кода для оперативной верификации фиксов.
+                Ищу долгосрочную позицию в стабильной команде,
+                где смогу применить свой опыт и системный подход к качеству.
+            </div>
+        </section>
+
+        <!-- ============================= -->
+        <!--  НАВЫКИ                       -->
+        <!-- ============================= -->
+        <section class="section">
+            <div class="section-title">Навыки</div>
+            <div class="skills-grid">
+
+                <div class="skill-group">
+                    <span class="skill-label">Типы тестирования</span>
+                    <span class="skill-value">
+                        <span class="badge">Functional</span>
+                        <span class="badge">Regression</span>
+                        <span class="badge">Integration</span>
+                        <span class="badge">API</span>
+                        <span class="badge">UI/UX</span>
+                        <span class="badge">Compatibility (Web/Mobile)</span>
+                    </span>
+                </div>
+
+                <div class="skill-group">
+                    <span class="skill-label">API &amp; отладка</span>
+                    <span class="skill-value">
+                        <span class="badge">Postman (базово)</span>
+                        <span class="badge">Chrome DevTools</span>
+                    </span>
+                </div>
+
+                <div class="skill-group">
+                    <span class="skill-label">Управление стендами</span>
+                    <span class="skill-value">
+                        <span class="badge">Изолированные инстансы (multi-tenant)</span>
+                        <span class="badge">Переключение конфигураций</span>
+                    </span>
+                </div>
+
+                <div class="skill-group">
+                    <span class="skill-label">Сборка &amp; CI/CD</span>
+                    <span class="skill-value">
+                        <span class="badge">Android/iOS/Cordova/Web (CLI)</span>
+                        <span class="badge">Jenkins (пайплайны)</span>
+                        <span class="badge">VCS: GitHub, SourceTree</span>
+                        <span class="badge">IDE: IntelliJ, VS Code</span>
+                    </span>
+                </div>
+
+                <div class="skill-group">
+                    <span class="skill-label">Мониторинг</span>
+                    <span class="skill-value">
+                        <span class="badge">Sentry</span>
+                        <span class="badge">Flipper</span>
+                        <span class="badge">Glitchtip</span>
+                    </span>
+                </div>
+
+                <div class="skill-group">
+                    <span class="skill-label">Трекинг &amp; документация</span>
+                    <span class="skill-value">
+                        <span class="badge">Jira</span>
+                        <span class="badge">YouTrack</span>
+                        <span class="badge">Redmine</span>
+                        <span class="badge">Confluence</span>
+                        <span class="badge">Coda</span>
+                        <span class="badge">TestRail</span>
+                    </span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================= -->
+        <!--  ОПЫТ РАБОТЫ                  -->
+        <!-- ============================= -->
+        <section class="section">
+            <div class="section-title">Опыт работы</div>
+
+            <!-- ---------- ТЕКУЩЕЕ ---------- -->
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-company">
+                        Мобильные решения для строительства
+                        <span class="exp-role">— QA Manual Engineer</span>
+                    </span>
+                    <span class="exp-period">Декабрь 2021 – настоящее время</span>
+                </div>
+                <ul class="exp-description">
+                    <li>Снизил количество дефектов на Production на <strong>90%</strong> за счёт внедрения детализированных чек-листов регрессии (охват ~60% системы).</li>
+                    <li>Проводил полный цикл ручного тестирования: функциональное, регрессионное и интеграционное front-end (JS) и back-end компонентов перед еженедельными релизами. Проводил UAT-сессии с Product Owner и фокус-группами заказчиков.</li>
+                    <li>Настраивал изолированные тестовые стенды (Develop/Staging/UAT) и управлял конфигурациями окружений.</li>
+                    <li>Выполнял локальную сборку web-интерфейса и мобильных приложений (Android, iOS, Cordova) через CLI для оперативной верификации фиксов.</li>
+                    <li>Актуализировал базу знаний: переписал тестовую документацию и покрыл новыми сценариями <strong>50%</strong> ранее не описанных компонентов в Coda.</li>
+                    <li>Внедрил стандарты оформления баг-репортов, сократив Time to Start разработчиков на <strong>30–40%</strong>.</li>
+                    <li>Регистрировал дефекты в YouTrack с логированием (Glitchtip/Flipper), контролировал жизненный цикл до релиза.</li>
+                </ul>
+            </div>
+
+            <!-- ---------- 2018–2021 ---------- -->
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-company">
+                        ООО «АЙ ЭМ ЭЛ» (IML)
+                        <span class="exp-role">— Тестировщик ПО / Аналитик</span>
+                    </span>
+                    <span class="exp-period">Сентябрь 2018 – Октябрь 2021</span>
+                </div>
+                <ul class="exp-description">
+                    <li>Проводил комплексное ручное тестирование сайта и мобильного приложения: функциональное, регрессионное и UI/UX с фокусом на логику доставки.</li>
+                    <li>Спроектировал архитектуру тестовой документации: разработал библиотеку тест-кейсов в TestRail (~90% покрытия), которые легли в основу UI-автотестов (Selenium WebDriver).</li>
+                    <li>Обеспечивал Data-driven тестирование: готовил наборы данных в Excel для проверки тарифной сетки.</li>
+                    <li>Детализировал требования: прорабатывал критерии приемки с бизнесом и разработкой.</li>
+                    <li>Управлял тестовыми контурами и готовил аналитическую отчетность по качеству для руководства.</li>
+                </ul>
+            </div>
+
+            <!-- ---------- 2015–2016 ---------- -->
+            <div class="experience-item">
+                <div class="exp-header">
+                    <span class="exp-company">
+                        ООО «СК «Независимость»
+                        <span class="exp-role">— Инженер по тестированию</span>
+                    </span>
+                    <span class="exp-period">Январь 2015 – Июль 2016</span>
+                </div>
+                <div class="exp-short">
+                    Руководил центром компетенций автотестов, внедрял процессы написания тестов и выстраивал CI/CD пайплайн (Jenkins).
+                </div>
+            </div>
+
+            <!-- ---------- 2005–2014 ---------- -->
+            <div class="experience-item" style="margin-bottom:0;">
+                <div class="exp-header">
+                    <span class="exp-company">
+                        ОАО СК «РОСНО» / ОАО СК «Альянс»
+                        <span class="exp-role">— Специалист группы тестирования</span>
+                    </span>
+                    <span class="exp-period">Май 2005 – Октябрь 2014</span>
+                </div>
+                <div class="exp-short">
+                    Тестирование коробочных страховых продуктов, проведение UAT-релизов, постановка задач разработчикам.
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============================= -->
+        <!--  ОБРАЗОВАНИЕ                  -->
+        <!-- ============================= -->
+        <section class="section">
+            <div class="section-title">Образование</div>
+
+            <div class="edu-item">
+                <span class="edu-year">2013</span>
+                <span class="edu-desc">
+                    Московская гуманитарно-техническая академия — <span class="edu-major">Бакалавр лингвистики</span>
+                </span>
+            </div>
+
+            <div class="edu-item">
+                <span class="edu-year">2003</span>
+                <span class="edu-desc">
+                    Московский промышленно-экономический техникум — <span class="edu-major">Техник-механик</span>
+                </span>
+            </div>
+        </section>
+
+        <!-- ============================= -->
+        <!--  ЯЗЫКИ + ДОПОЛНИТЕЛЬНО        -->
+        <!-- ============================= -->
+        <section class="section">
+            <div class="section-title">Языки и дополнительная информация</div>
+            <div class="two-col">
+
+                <!-- Левая колонка: Языки -->
+                <div class="col">
+                    <strong>Языки</strong>
+                    <ul>
+                        <li><strong>Русский</strong> — родной</li>
+                        <li><strong>Английский</strong> — B1 (чтение технической документации, переписка)</li>
+                    </ul>
+                </div>
+
+                <!-- Правая колонка: Дополнительно -->
+                <div class="col">
+                    <strong>Дополнительно</strong>
+                    <ul>
+                        <li><strong>Системный подход:</strong> детальное описание шагов воспроизведения дефектов.</li>
+                        <li><strong>Работа с документацией:</strong> выстраивание базы знаний с нуля.</li>
+                        <li><strong>Быстрая обучаемость:</strong> адаптация к новым фреймворкам и требованиям бизнеса.</li>
+                        <li><strong>Портфолио:</strong> примеры тест-кейсов, чек-листов и баг-репортов на <a href="#">GitHub</a>.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- невидимый нижний отступ для воздуха -->
+        <div style="height:4px;"></div>
+
+    </div>
+    <!-- /.resume -->
+</body>
+</html>
