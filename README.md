@@ -41,9 +41,11 @@
 
 - **Инструменты API и отладка:** Postman (базово), Chrome DevTools
 
-- **Управление стендами:** Настройка изолированных инстансов (multi-tenant), переключение конфигураций между версиями сервисов
+- **Управление стендами:** Изолированные инстансы (multi-tenant), переключение конфигураций
 
-- **Сборка и CI/CD:** Локальная сборка Android/iOS/Cordova/Web (CLI), Jenkins (пайплайны, деплой модулей и инстансов), VCS: GitHub, SourceTree, IDE: IntelliJ IDEA, VS Code
+- **Сборка и CI/CD:** Локальная сборка Android/iOS/Cordova/Web (CLI), Jenkins (пайплайны, деплой модулей и инстансов)
+
+- **Контроль версий и IDE:** GitHub, SourceTree, IntelliJ IDEA, VS Code
 
 - **Мониторинг ошибок и логов:** Sentry, Flipper, Glitchtip
 
